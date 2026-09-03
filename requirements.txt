@@ -1,7 +1,7 @@
-Plaintext
 streamlit
 pandas
 openpyxl
 pdfplumber
 pillow
 pytesseract
+pypdf
