@@ -13,11 +13,47 @@ if os.name == "nt":  # Windows local machine
     if os.path.exists(windows_tesseract):
         pytesseract.pytesseract.tesseract_cmd = windows_tesseract
 
-# Page Config
-st.set_page_config(page_title="File to Excel Converter", page_icon="⚡", layout="wide")
+# Page Configuration
+st.set_page_config(
+    page_title="File to Excel Converter",
+    page_icon="⚡",
+    layout="wide"
+)
 
+# Custom CSS for Developer Branding Footer
+st.markdown("""
+    <style>
+    .developer-footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #0e1117;
+        color: #808495;
+        text-align: center;
+        padding: 8px 0;
+        font-size: 14px;
+        font-weight: 500;
+        border-top: 1px solid #262730;
+        z-index: 9999;
+    }
+    .developer-footer span {
+        color: #00d47e;
+        font-weight: bold;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Sidebar Developer Info
+with st.sidebar:
+    st.title("📌 App Info")
+    st.write("Convert PDFs, TXT, CSV, and Image files into Excel spreadsheets instantly.")
+    st.divider()
+    st.caption("💻 Developed by **Dhiraj Patil**")
+
+# Main Header
 st.title("⚡ File-to-Excel Converter Web App")
-st.write("Upload a **PDF**, **TXT**, **CSV**, or **Image (JPG/PNG)** file to parse its content and export it as an Excel spreadsheet.")
+st.write("Upload a **PDF**, **TXT**, **CSV**, or **Image (JPG/PNG)** file to parse its content and export it directly as an Excel spreadsheet.")
 
 # Helper function to extract data
 def extract_data_from_file(uploaded_file):
@@ -79,7 +115,7 @@ def smart_parse_line(line):
 
     return line.split()
 
-# Main UI
+# File Uploader
 uploaded_file = st.file_uploader("Choose a file to convert", type=["pdf", "txt", "csv", "jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
@@ -161,3 +197,9 @@ if uploaded_file is not None:
                 file_name="converted_output.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
+# Sticky Bottom Footer for Developer Branding
+st.markdown(
+    '<div class="developer-footer">Developed by <span>Dhiraj Patil</span></div>',
+    unsafe_allow_html=True
+)
